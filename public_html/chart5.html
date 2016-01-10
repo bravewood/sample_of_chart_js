@@ -1,0 +1,118 @@
+<!doctype html>
+<html>
+<head>
+    <title>Conversion rate of AB test</title>
+    <style>
+        .legend {
+            width: 270px;
+        }
+    </style>
+    <script src="assets/js/Chart.js-master/Chart.js"></script>
+</head>
+<body>
+    <h1>Conversion rate of AB test</h1>
+    <div>Duration: from 2016-01-08 to 2016-01-15</div>
+
+    <table>
+        <tr>
+            <th>variant 1</th>
+            <th>variant 2</th>
+        </tr>
+        <tr>
+            <td>
+                <canvas id="chart5_1" height="250" width="250"></canvas>
+                <div id="legend5_1" class="legend"></div>
+            </td>
+            <td>
+                <canvas id="chart5_2" height="250" width="250"></canvas>
+                <div id="legend5_2" class="legend"></div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <canvas id="chart5_3" height="250" width="250"></canvas>
+                <div id="legend5_3" class="legend"></div>
+            </td>
+            <td>
+                <canvas id="chart5_4" height="250" width="250"></canvas>
+                <div id="legend5_4" class="legend"></div>
+            </td>
+        </tr>
+    </table>
+<script>
+    var data1 = [
+        {
+            value: 250,
+            color:"#F7464A",
+            highlight: "#FF5A5E",
+            label: "no action (57%)"
+        },
+        {
+            value: 100,
+            color: "#46BFBD",
+            highlight: "#5AD3D1",
+            label: "listed (43%)"
+        }
+    ];
+    var data2 = [
+        {
+            value: 300,
+            color:"#F7464A",
+            highlight: "#FF5A5E",
+            label: "no action (85%)"
+        },
+        {
+            value: 50,
+            color: "#46BFBD",
+            highlight: "#5AD3D1",
+            label: "listed (15%)"
+        }
+    ];
+    var data3 = {
+        labels: ["< $10", "< $20", "< $30", "< $40", "< $50", "< $60", ">= $60"],
+        datasets: [
+            {
+                label: "Number of users who listed items vs sum prices of listed items",
+                fillColor: "rgba(111, 157, 231, 0.5)",
+                strokeColor: "rgba(220,220,220,0.8)",
+                highlightFill: "rgba(220,220,220,0.75)",
+                highlightStroke: "rgba(220,220,220,1)",
+                data: [321, 101, 80, 43, 21, 7, 27]
+            }
+        ]
+    };
+    var data4 = {
+        labels: ["< $10", "< $20", "< $30", "< $40", "< $50", "< $60", ">= $60"],
+        datasets: [
+            {
+                label: "Number of users who listed items vs sum prices of listed items",
+                fillColor: "rgba(111, 157, 231, 0.5)",
+                strokeColor: "rgba(220,220,220,0.8)",
+                highlightFill: "rgba(220,220,220,0.75)",
+                highlightStroke: "rgba(220,220,220,1)",
+                data: [431, 189, 72, 21, 12, 3, 32]
+            }
+        ]
+    };
+    var options = {
+        legendTemplate : "<% for (var i=0; i<segments.length; i++){%><span style=\"background-color:<%=segments[i].fillColor%>\">&nbsp;&nbsp;&nbsp;</span>&nbsp;<%if(segments[i].label){%><%=segments[i].label%>: <%=segments[i].value%><%}%><br><%}%>"
+    };
+    var options2 = {
+        legendTemplate : "<% for (var i=0; i<datasets.length; i++){%><span style=\"background-color:<%=datasets[i].fillColor%>\">&nbsp;&nbsp;&nbsp;</span>&nbsp;<%if(datasets[i].label){%><%=datasets[i].label%><%}%><br><%}%>"
+    };
+    var myRadarChart1 = new Chart(document.getElementById("chart5_1").getContext("2d"))
+      .Pie(data1,options);
+    document.getElementById("legend5_1").innerHTML = myRadarChart1.generateLegend();
+    var myPieChart2 = new Chart(document.getElementById("chart5_2").getContext("2d"))
+      .Pie(data2,options);
+    document.getElementById("legend5_2").innerHTML = myPieChart2.generateLegend();
+
+    var myChart3 = new Chart(document.getElementById("chart5_3").getContext("2d"))
+      .Bar(data3,options2);
+    document.getElementById("legend5_3").innerHTML = myChart3.generateLegend();
+    var myChart4 = new Chart(document.getElementById("chart5_4").getContext("2d"))
+      .Bar(data4,options2);
+    document.getElementById("legend5_4").innerHTML = myChart4.generateLegend();
+</script>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!doctype html>
+<html>
+<head>
+    <title>Chart4</title>
+    <style>
+    </style>
+    <script src="assets/js/Chart.js-master/Chart.js"></script>
+</head>
+<body>
+    <table>
+        <tr>
+            <th>variant 1</th>
+            <th>variant 2</th>
+        </tr>
+        <tr>
+            <td>
+                <canvas id="chart4_1" height="250" width="250"></canvas>
+                <div id="legend4_1"></div>
+            </td>
+            <td>
+                <canvas id="chart4_2" height="250" width="250"></canvas>
+                <div id="legend4_2"></div>
+            </td>
+        </tr>
+    </table>
+<script>
+    var data1 = {
+        labels: ["デザイン", "フィードバック", "フロー", "ストック", "大規模利用", "コスト"],
+        datasets: [
+            {
+                label: "Qiita:Team",
+                fillColor: "rgba(200,0,0,0.2)",
+                strokeColor: "green",
+                pointColor: "green",
+                pointStrokeColor: "green",
+                pointHighlightFill: "green",
+                pointHighlightStroke: "green",
+                data: [4, 3, 5, 2, 4, 3]
+            },
+            {
+                label: "esa",
+                fillColor: "rgba(200,0,0,0.2)",
+                strokeColor: "red",
+                pointColor: "red",
+                pointStrokeColor: "red",
+                pointHighlightFill: "red",
+                pointHighlightStroke: "red",
+                data: [5, 5, 2, 5, 3, 3]
+            },
+            {
+                label: "DocBase",
+                fillColor: "rgba(200,0,0,0.2)",
+                strokeColor: "yellow",
+                pointColor: "yellow",
+                pointStrokeColor: "yellow",
+                pointHighlightFill: "yellow",
+                pointHighlightStroke: "yellow",
+                data: [3, 4, 2, 5, 5, 3]
+            }
+        ]
+    };
+    var data2 = [
+        {
+            value: 300,
+            color:"#F7464A",
+            highlight: "#FF5A5E",
+            label: "variant 1 (85%)"
+        },
+        {
+            value: 50,
+            color: "#46BFBD",
+            highlight: "#5AD3D1",
+            label: "variant 2 (15%)"
+        }
+    ];
+    var options1 = {
+        legendTemplate : "<% for (var i=0; i<datasets.length; i++){%><span style=\"background-color:<%=datasets[i].strokeColor%>\">&nbsp;&nbsp;&nbsp;</span>&nbsp;<%if(datasets[i].label){%><%=datasets[i].label%><%}%><br><%}%>"
+    };
+    var options2 = {
+        legendTemplate : "<% for (var i=0; i<segments.length; i++){%><span style=\"background-color:<%=segments[i].fillColor%>\">&nbsp;&nbsp;&nbsp;</span>&nbsp;<%if(segments[i].label){%><%=segments[i].label%>: <%=segments[i].value%><%}%><br><%}%>"
+    };
+    var myRadarChart1 = new Chart(document.getElementById("chart4_1").getContext("2d"))
+      .Radar(data1,options1);
+    document.getElementById("legend4_1").innerHTML = myRadarChart1.generateLegend();
+    var myPieChart2 = new Chart(document.getElementById("chart4_2").getContext("2d"))
+      .Pie(data2,options2);
+    document.getElementById("legend4_2").innerHTML = myPieChart2.generateLegend();
+</script>
+</body>
+</html>
