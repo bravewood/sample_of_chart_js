@@ -1,0 +1,207 @@
+<!doctype html>
+<html>
+<head>
+    <title>Stacked chart</title>
+    <style>
+        .legend {
+            width: 270px;
+        }
+    </style>
+    <script src="assets/js/Chart.js-master/Chart.min.js"></script>
+    <script src="assets/js/Chart.StackedBar.js-master/src/Chart.StackedBar.js"></script>
+</head>
+<body>
+    <h1>Stacked</h1>
+    <div>Duration: from 2016-01-08 to 2016-01-15</div>
+
+    <table>
+        <tr>
+            <th>variant 1</th>
+            <th>variant 2</th>
+        </tr>
+        <tr>
+            <td>
+                <canvas id="chart1" height="350" width="350"></canvas>
+                <div id="legend1" class="legend"></div>
+            </td>
+            <td>
+                <canvas id="chart2" height="350" width="350"></canvas>
+                <div id="legend2" class="legend"></div>
+            </td>
+        </tr>
+    </table>
+<script>
+    var randomScalingFactor = function(){ return Math.round(Math.random()*100)};
+    var randomColorFactor = function(){ return Math.round(Math.random()*255)};
+    var barChartData1 = {
+        labels : ["January","February","March","April","May","June","July"],
+        datasets : [
+            {
+                fillColor : "rgba(220,220,220,0.5)",
+                strokeColor : "rgba(220,220,220,0.8)",
+                highlightFill: "rgba(220,220,220,0.75)",
+                highlightStroke: "rgba(220,220,220,1)",
+                data : [randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor()]
+            },
+            {
+                fillColor : "rgba(151,187,205,0.5)",
+                strokeColor : "rgba(151,187,205,0.8)",
+                highlightFill : "rgba(151,187,205,0.75)",
+                highlightStroke : "rgba(151,187,205,1)",
+                data : [randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor()]
+            },
+            {
+                fillColor : "rgba(240,73,73,0.5)",
+                strokeColor : "rgba(240,73,73,0.8)",
+                highlightFill : "rgba(240,73,73,0.75)",
+                highlightStroke : "rgba(240,73,73,1)",
+                data : [randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor()]
+            }
+        ]
+    };
+    var barChartData2 = {
+        labels : ["2015-01","2015-02","2015-03","2015-04","2015-05","2015-06","2015-07", "2015-08", "2015-09", "2015-10", "2015-11", "2015-12", "2016-01"],
+        datasets : [
+            {
+                label: "2016-01",
+                fillColor : "rgba(0, 0, 255, 0.5)",
+                strokeColor : "rgba(240,73,73,0.8)",
+                highlightFill : "rgba(240,73,73,0.75)",
+                highlightStroke : "rgba(240,73,73,1)",
+                data : [0,0,0,0,0,0,0,0,0,0,0,0,10]
+            },
+            {
+                label: "2015-12",
+                fillColor : "rgba(153, 102, 51, 0.5)",
+                strokeColor : "rgba(240,73,73,0.8)",
+                highlightFill : "rgba(240,73,73,0.75)",
+                highlightStroke : "rgba(240,73,73,1)",
+                data : [0,0,0,0,0,0,0,0,0,0,0,10,10]
+            },
+            {
+                label: "2015-11",
+                fillColor : "rgba(0, 255, 255, 0.5)",
+                strokeColor : "rgba(240,73,73,0.8)",
+                highlightFill : "rgba(240,73,73,0.75)",
+                highlightStroke : "rgba(240,73,73,1)",
+                data : [0,0,0,0,0,0,0,0,0,0,10,10,10]
+            },
+            {
+                label: "2015-10",
+                fillColor : "rgba(0, 255, 0, 0.5)",
+                strokeColor : "rgba(240,73,73,0.8)",
+                highlightFill : "rgba(240,73,73,0.75)",
+                highlightStroke : "rgba(240,73,73,1)",
+                data : [0,0,0,0,0,0,0,0,0,10,10,10,10]
+            },
+            {
+                label: "2015-09",
+                fillColor : "rgba(255, 0, 255, 0.5)",
+                strokeColor : "rgba(240,73,73,0.8)",
+                highlightFill : "rgba(240,73,73,0.75)",
+                highlightStroke : "rgba(240,73,73,1)",
+                data : [0,0,0,0,0,0,0,0,10,10,10,10,10]
+            },
+            {
+                label: "2015-08",
+                fillColor : "rgba(255, 128, 0, 0.5)",
+                strokeColor : "rgba(240,73,73,0.8)",
+                highlightFill : "rgba(240,73,73,0.75)",
+                highlightStroke : "rgba(240,73,73,1)",
+                data : [0,0,0,0,0,0,0,10,10,10,10,10,10]
+            },
+            {
+                label: "2015-07",
+                fillColor : "rgba(128, 0, 128, 0.5)",
+                strokeColor : "rgba(240,73,73,0.8)",
+                highlightFill : "rgba(240,73,73,0.75)",
+                highlightStroke : "rgba(240,73,73,1)",
+                data : [0,0,0,0,0,0,10,10,10,10,10,10,10]
+            },
+            {
+                label: "2015-06",
+                fillColor : "rgba(255, 0, 0, 0.5)",
+                strokeColor : "rgba(240,73,73,0.8)",
+                highlightFill : "rgba(240,73,73,0.75)",
+                highlightStroke : "rgba(240,73,73,1)",
+                data : [0,0,0,0,0,10,10,10,10,10,10,10,10]
+            },
+            {
+                label: "2015-05",
+                fillColor : "rgba(255, 255, 0, 0.5)",
+                strokeColor : "rgba(240,73,73,0.8)",
+                highlightFill : "rgba(240,73,73,0.75)",
+                highlightStroke : "rgba(240,73,73,1)",
+                data : [0,0,0,0,10,10,10,10,10,10,10,10,10]
+            },
+            {
+                label: "2015-04",
+                fillColor : "rgba(0, 128, 64, 0.5)",
+                strokeColor : "rgba(240,73,73,0.8)",
+                highlightFill : "rgba(240,73,73,0.75)",
+                highlightStroke : "rgba(240,73,73,1)",
+                data : [0,0,0,10,10,10,10,10,10,10,10,10,10]
+            },
+
+
+
+            {
+                label: "2015-03",
+                fillColor : "rgba(240,73,73,0.5)",
+                strokeColor : "rgba(240,73,73,0.8)",
+                highlightFill : "rgba(240,73,73,0.75)",
+                highlightStroke : "rgba(240,73,73,1)",
+                data : [0,0,10,10,10,10,10,10,10,10,10,10,10]
+            },
+
+            {
+                label: "2015-02",
+                fillColor : "rgba(151,187,205,0.5)",
+                strokeColor : "rgba(151,187,205,0.8)",
+                highlightFill : "rgba(151,187,205,0.75)",
+                highlightStroke : "rgba(151,187,205,1)",
+                data : [0,10,9,8,5,4,3,2,2,2,1,1,1]
+            },
+            {
+                label: "2015-01",
+                fillColor : "rgba(220,220,220,0.5)",
+                strokeColor : "rgba(220,220,220,0.8)",
+                highlightFill: "rgba(220,220,220,0.75)",
+                highlightStroke: "rgba(220,220,220,1)",
+                data : [10,9,8,8,7,7,6,5,4,3,2,2,2]
+            }
+
+        ]
+    };
+    var options = {
+        responsive : true,
+        legendTemplate : "<% for (var i=0; i<segments.length; i++){%><span style=\"background-color:<%=segments[i].fillColor%>\">&nbsp;&nbsp;&nbsp;</span>&nbsp;<%if(segments[i].label){%><%=segments[i].label%>: <%=segments[i].value%><%}%><br><%}%>"
+    };
+    var options2 = {
+        responsive : true,
+        legendTemplate : "<% for (var i=0; i<datasets.length; i++){%><span style=\"background-color:<%=datasets[i].fillColor%>\">&nbsp;&nbsp;&nbsp;</span>&nbsp;<%if(datasets[i].label){%><%=datasets[i].label%><%}%><br><%}%>"
+    };
+    var ctx = document.getElementById("chart1").getContext("2d");
+    var myBar1 = new Chart(ctx).StackedBar(barChartData1, options2);
+    document.getElementById("legend1").innerHTML = myBar1.generateLegend();
+    var ctx = document.getElementById("chart2").getContext("2d");
+    var myBar2 = new Chart(ctx).StackedBar(barChartData2, options2);
+    document.getElementById("legend2").innerHTML = myBar2.generateLegend();
+/*
+    var myRadarChart1 = new Chart(document.getElementById("chart5_1").getContext("2d"))
+      .Pie(data1,options);
+    document.getElementById("legend5_1").innerHTML = myRadarChart1.generateLegend();
+    var myPieChart2 = new Chart(document.getElementById("chart5_2").getContext("2d"))
+      .Pie(data2,options);
+    document.getElementById("legend5_2").innerHTML = myPieChart2.generateLegend();
+
+    var myChart3 = new Chart(document.getElementById("chart5_3").getContext("2d"))
+      .Bar(data3,options2);
+    document.getElementById("legend5_3").innerHTML = myChart3.generateLegend();
+    var myChart4 = new Chart(document.getElementById("chart5_4").getContext("2d"))
+      .Bar(data4,options2);
+    document.getElementById("legend5_4").innerHTML = myChart4.generateLegend();
+    */
+</script>
+</body>
+</html>

@@ -8,4 +8,11 @@ Then open the url http://localhost:8000/ .
 
 ## Chart.js Docs
 To learn more about Chart.js, please visit following link.
-http://www.chartjs.org/docs/
+
++ http://www.chartjs.org/docs/
+
+## Software
+This repository codes are usign following libraries.
+
++ http://www.chartjs.org/
++ https://github.com/Regaddi/Chart.StackedBar.js
