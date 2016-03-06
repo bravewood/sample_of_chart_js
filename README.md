@@ -12,7 +12,8 @@ To learn more about Chart.js, please visit following link.
 + http://www.chartjs.org/docs/
 
 ## Software
-This repository codes are usign following libraries.
+This repository codes are using the following libraries.
 
 + http://www.chartjs.org/
 + https://github.com/Regaddi/Chart.StackedBar.js
++ https://jquery.com/

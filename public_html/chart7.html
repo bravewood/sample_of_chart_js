@@ -1,0 +1,265 @@
+<!doctype html>
+<html>
+<head>
+    <title>Conversion rate of AB test</title>
+    <style>
+        .legend {
+            width: 270px;
+        }
+        th, td {
+            vertical-align: top;
+        }
+        th {
+            border-top: solid 1px black;
+        }
+        #statistics {
+            width: 100%;
+
+        }
+        #statistics td {
+            border-top: solid 1px black;
+            text-align: right;
+        }
+        #statistics td.up {
+            background-color: #c9faab;
+        }
+        #statistics td.down {
+            background-color: #f0ced1;
+        }
+    </style>
+    <script src="assets/js/jQuery/jquery-2.2.1.min.js"></script>
+    <script src="assets/js/Chart.js-master/Chart.min.js"></script>
+    <script src="assets/js/Chart.StackedBar.js-master/src/Chart.StackedBar.js"></script>
+</head>
+<body>
+    <h1>Sample7</h1>
+    <table id="sample">
+        <tr>
+            <th>Login(UU)</th>
+            <th>Signup</th>
+        </tr>
+        <tr>
+            <td>
+                <div id="legend1" class="legend"></div>
+                <canvas id="chart1" height="400" width="500"></canvas>
+            </td>
+            <td>
+                <div id="legend2" class="legend"></div>
+                <canvas id="chart2" height="400" width="500"></canvas>
+            </td>
+        </tr>
+        <tr>
+            <th>spent(sum)</th>
+            <th>spent(avg)</th>
+        </tr>
+        <tr>
+            <td>
+                <div id="legend3" class="legend"></div>
+                <canvas id="chart3" height="400" width="500"></canvas>
+            </td>
+            <td>
+                <div id="legend4" class="legend"></div>
+                <canvas id="chart4" height="400" width="500"></canvas>
+                <div>* The data of `Current user` include second time buyer of our service.</div>
+            </td>
+        </tr>
+        <tr>
+            <th>spent(sum) 24hour (D2D)</th>
+            <th>Daily statistics(yesterday)</th>
+        </tr>
+        <tr>
+            <td>
+                <div id="legend5" class="legend"></div>
+                <canvas id="chart5" height="400" width="500"></canvas>
+            </td>
+            <td>
+                <table id="statistics">
+                    <tr>
+                        <th>KPI</th>
+                        <th>Value</th>
+                        <th>D2D</th>
+                        <th>W2W</th>
+                    </tr>
+                    <tr>
+                        <th>Login</th>
+                        <td>2,512</td>
+                        <td class="up">+0.2%</td>
+                        <td class="down">-0.1%</td>
+                    </tr>
+                    <tr>
+                        <th>Signup</th>
+                        <td>1,023</td>
+                        <td class="up">+0.3%</td>
+                        <td class="up">+1.2%</td>
+                    </tr>
+                    <tr>
+                        <th>Spent(¥)</th>
+                        <td>1,234,567</td>
+                        <td class="up">+0.1%</td>
+                        <td class="up">+0.2%</td>
+                    </tr>
+                    <tr>
+                        <th>New Buyer</th>
+                        <td>251</td>
+                        <td class="up">+0.3%</td>
+                        <td class="up">+1.2%</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+<script>
+    var data1 = {
+        labels: [],
+        datasets: [
+            {
+                label: "Login(UU)",
+                fillColor: "rgba(111, 157, 231, 0.5)",
+                strokeColor: "rgba(220,220,220,0.8)",
+                highlightFill: "rgba(220,220,220,0.75)",
+                highlightStroke: "rgba(220,220,220,1)",
+                data: []
+            }
+        ]
+    };
+    var data2 = {
+        labels: [],
+        datasets: [
+            {
+                label: "Signup",
+                fillColor : "rgba(151,187,205,0.5)",
+                strokeColor : "rgba(151,187,205,0.8)",
+                highlightFill : "rgba(151,187,205,0.75)",
+                highlightStroke : "rgba(151,187,205,1)",
+                data: []
+            }
+        ]
+    };
+    var data3 = {
+        labels : [],
+        datasets : [
+            {
+                label: "First time buyer",
+                fillColor : "rgba(151,187,205,0.5)",
+                strokeColor : "rgba(151,187,205,0.8)",
+                highlightFill : "rgba(151,187,205,0.75)",
+                highlightStroke : "rgba(151,187,205,1)",
+                data : []
+            },
+            {
+                label: "current users",
+                fillColor : "rgba(220,220,220,0.5)",
+                strokeColor : "rgba(220,220,220,0.8)",
+                highlightFill: "rgba(220,220,220,0.75)",
+                highlightStroke: "rgba(220,220,220,1)",
+                data : []
+            }
+        ]
+    };
+    var data4 = {
+        labels: [],
+        datasets: [
+            {
+                label: "First time buyer",
+                fillColor: "rgba(151,187,205,0.2)",
+                strokeColor: "rgba(151,187,205,1)",
+                pointColor: "rgba(151,187,205,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(151,187,205,1)",
+                data: []
+            },
+            {
+                label: "current users",
+                fillColor: "rgba(220,220,220,0)",
+                strokeColor: "rgba(220,220,220,1)",
+                pointColor: "rgba(220,220,220,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(220,220,220,1)",
+                data: []
+            }
+        ]
+    };
+    var data5 = {
+        labels: [],
+        datasets: [
+            {
+                label: "yesterday",
+                fillColor: "rgba(220,220,220,0)",
+                strokeColor: "rgba(220,220,220,1)",
+                pointColor: "rgba(220,220,220,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(220,220,220,1)",
+                data: []
+            },
+            {
+                label: "today",
+                fillColor: "rgba(151,187,205,0.2)",
+                strokeColor: "rgba(151,187,205,1)",
+                pointColor: "rgba(151,187,205,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(151,187,205,1)",
+                data: []
+            }
+        ]
+    };
+    jQuery(document).ready(function(){
+        $.ajax({
+            url: "/api/chart7.php"
+        }).done(function(data) {
+            data1["labels"] = data[0]["labels"];
+            data1["datasets"][0]["data"] = data[0]["datasets"];
+            data2["labels"] = data[1]["labels"];
+            data2["datasets"][0]["data"] = data[1]["datasets"];
+            data3["labels"] = data[2]["labels"];
+            data3["datasets"][0]["data"] = data[2]["datasets"][0];
+            data3["datasets"][1]["data"] = data[2]["datasets"][1];
+            data4["labels"] = data[3]["labels"];
+            data4["datasets"][0]["data"] = data[3]["datasets"][0];
+            data4["datasets"][1]["data"] = data[3]["datasets"][1];
+            data5["labels"] = data[4]["labels"];
+            data5["datasets"][0]["data"] = data[4]["datasets"][0];
+            data5["datasets"][1]["data"] = data[4]["datasets"][1];
+
+            var options1 = {
+                legendTemplate : "<% for (var i=0; i<datasets.length; i++){%><span style=\"background-color:<%=datasets[i].fillColor%>\">&nbsp;&nbsp;&nbsp;</span>&nbsp;<%if(datasets[i].label){%><%=datasets[i].label%><%}%><br><%}%>"
+            };
+            var myChart1 = new Chart(document.getElementById("chart1").getContext("2d"))
+              .Bar(data1,options1);
+            document.getElementById("legend1").innerHTML = myChart1.generateLegend();
+            var myChart2 = new Chart(document.getElementById("chart2").getContext("2d"))
+              .Bar(data2,options1);
+            document.getElementById("legend2").innerHTML = myChart2.generateLegend();
+
+            var options2 = {
+                responsive : true,
+                legendTemplate : "<% for (var i=0; i<datasets.length; i++){%><span style=\"background-color:<%=datasets[i].fillColor%>\">&nbsp;&nbsp;&nbsp;</span>&nbsp;<%if(datasets[i].label){%><%=datasets[i].label%><%}%><br><%}%>"
+            };
+            var ctx = document.getElementById("chart3").getContext("2d");
+            var myBar3 = new Chart(ctx).StackedBar(data3, options2);
+            document.getElementById("legend3").innerHTML = myBar3.generateLegend();
+
+            var options4 = {
+                legendTemplate : "<% for (var i=0; i<datasets.length; i++){%><span style=\"background-color:<%=datasets[i].strokeColor%>\">&nbsp;&nbsp;&nbsp;</span>&nbsp;<%if(datasets[i].label){%><%=datasets[i].label%><%}%><br><%}%>",
+                scaleBeginAtZero: true
+            };
+            var myChart4 = new Chart(document.getElementById("chart4").getContext("2d"))
+              .StackedBar(data4, options4);
+            document.getElementById("legend4").innerHTML = myChart4.generateLegend();
+
+            var options5 = {
+                legendTemplate : "<% for (var i=0; i<datasets.length; i++){%><span style=\"background-color:<%=datasets[i].strokeColor%>\">&nbsp;&nbsp;&nbsp;</span>&nbsp;<%if(datasets[i].label){%><%=datasets[i].label%><%}%><br><%}%>"
+            };
+            var myChart5 = new Chart(document.getElementById("chart5").getContext("2d"))
+              .Line(data5,options5);
+            document.getElementById("legend5").innerHTML = myChart5.generateLegend();
+        });
+    });
+
+
+</script>
+</body>
+</html>
